@@ -32,31 +32,39 @@ class Api extends CI_Controller {
 		$this->check_api_key();
 		
 		$id_warga = $this->generate_new_id("warga","id_warga","WRG");
-		
-		$data = array(
-			'id_warga' => $id_warga,
-			'username' => $this->input->post('username'),
-			'password' => md5($this->input->post('password')), 
-			'nama' => $this->input->post('nama'),
-			'tempat_lahir' => $this->input->post('tempat_lahir'),
-			'tanggal_lahir' => $this->input->post('tanggal_lahir'),
-			'agama' => $this->input->post('agama'),
-			'kebangsaan' => $this->input->post('kebangsaan'),
-			'status_pernikahan' => $this->input->post('status_pernikahan'),
-			'pekerjaan' => $this->input->post('pekerjaan'),
-			'alamat' => $this->input->post('alamat'),
-			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
-			'kontak' => $this->input->post('kontak'),
-			'nik' => $this->input->post('nik')
-		);
-		
-		
-		$this->authentication_model->daftar_warga($data);
-		
-		$response = array('Status' => "Success", "Code" => 200);
-		$this->output->set_status_header(200)
-					->set_content_type('application/json', 'utf-8')
-					->set_output(json_encode($response));
+		if($this->upload_gambar($id_warga)){
+    		
+    		$data = array(
+    			'id_warga' => $id_warga,
+    			'username' => $this->input->post('username'),
+    			'password' => md5($this->input->post('password')), 
+    			'nama' => $this->input->post('nama'),
+    			'tempat_lahir' => $this->input->post('tempat_lahir'),
+    			'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+    			'agama' => $this->input->post('agama'),
+    			'kebangsaan' => $this->input->post('kebangsaan'),
+    			'status_pernikahan' => $this->input->post('status_pernikahan'),
+    			'pekerjaan' => $this->input->post('pekerjaan'),
+    			'alamat' => $this->input->post('alamat'),
+    			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+    			'kontak' => $this->input->post('kontak'),
+    			'nik' => $this->input->post('nik'),
+    			'ktp' => 'https://terraciv.me/ktp_uploads/'.$id_warga.'.'.$_POST['ext']
+    		);
+    		
+    		
+    		$this->authentication_model->daftar_warga($data);
+    		
+    		$response = array('Status' => "Success", "Code" => 200);
+    		$this->output->set_status_header(200)
+    					->set_content_type('application/json', 'utf-8')
+    					->set_output(json_encode($response));
+		}else{
+		    $response = array('Status' => "Terjadi Kesalahan", "Code" => 401);
+			$this->output->set_status_header(401)
+						->set_content_type('application/json', 'utf-8')
+						->set_output(json_encode($response));
+		}
 	}
 	
 	public function update_data_warga(){
@@ -1118,4 +1126,30 @@ class Api extends CI_Controller {
 						->set_output(json_encode($response));
 		}
 	}
+	
+	public function upload_gambar($name){
+	    if(isset($_FILES["image"]["name"])) {
+          
+            // Make sure you have created this directory already
+            $target_dir = "ktp_uploads/";
+          
+            // Generate a random name 
+            $target_file = $target_dir . $name . '.' . $_POST['ext'];
+            $check = getimagesize($_FILES["image"]["tmp_name"]);
+            if($check !== false) {
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                    return true;
+                }else {
+                    return false;
+                }
+            } else {
+                return false;
+               
+            }
+        }else{
+             return false;
+        }
+	}
+	
+	
 }

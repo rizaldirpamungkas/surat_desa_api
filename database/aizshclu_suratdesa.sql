@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.4
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Mar 03, 2020 at 03:30 AM
+-- Generation Time: Apr 14, 2020 at 12:13 PM
 -- Server version: 5.5.59
--- PHP Version: 7.2.26
+-- PHP Version: 7.2.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -86,7 +86,8 @@ INSERT INTO `keterangan_berpergian` (`id_sub_surat`, `id_surat`, `daerah_keberad
 ('SUB001', 'SRT001', 'Jayapura', 2015),
 ('SUB002', 'SRT010', 'Jepar', 2015),
 ('SUB003', 'SRT011', 'Hfgh', 2535),
-('SUB004', 'SRT012', 'Vfddcc', 535);
+('SUB004', 'SRT012', 'Vfddcc', 535),
+('SUB005', 'SRT016', '54765', 8355);
 
 -- --------------------------------------------------------
 
@@ -130,7 +131,8 @@ CREATE TABLE `keterangan_kehilangan` (
 --
 
 INSERT INTO `keterangan_kehilangan` (`id_sub_surat`, `id_surat`, `objek_hilang`, `tempat_hilang`, `tanggal_hilang`) VALUES
-('SUB001', 'SRT007', 'Laptop', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', '2019-08-06');
+('SUB001', 'SRT007', 'Laptop', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', '2019-08-06'),
+('SUB002', 'SRT015', 'Kartu Keluarga ( KK )', 'Rumah', '2002-03-18');
 
 -- --------------------------------------------------------
 
@@ -148,7 +150,8 @@ CREATE TABLE `keterangan_kelakuan` (
 --
 
 INSERT INTO `keterangan_kelakuan` (`id_sub_surat`, `id_surat`) VALUES
-('SUB001', 'SRT002');
+('SUB001', 'SRT002'),
+('SUB002', 'SRT014');
 
 -- --------------------------------------------------------
 
@@ -207,6 +210,22 @@ CREATE TABLE `keterangan_telah_menikah` (
 
 INSERT INTO `keterangan_telah_menikah` (`id_sub_surat`, `id_surat`, `nama_pasangan`, `tanggal_lahir_pasangan`, `tempat_lahir_pasangan`, `jenis_kelamin_pasangan`, `agama_pasangan`, `kebangsaan_pasangan`, `pekerjaan_pasangan`, `alamat_pasangan`, `tanggal_nikah`, `tempat_nikah`) VALUES
 ('SUB001', 'SRT008', 'Linda Rosmina', '1997-08-09', 'Ciamis', 'P', 'Islam', 'WNI', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', '2018-08-18', 'Ciamis');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notifikasi`
+--
+
+CREATE TABLE `notifikasi` (
+  `id_notifikasi` char(7) NOT NULL,
+  `id_warga` char(7) NOT NULL,
+  `id_surat` char(7) NOT NULL,
+  `isi` varchar(50) NOT NULL,
+  `read` tinyint(1) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -276,6 +295,7 @@ CREATE TABLE `surat` (
   `id_surat` char(7) NOT NULL,
   `id_pemohon` char(7) NOT NULL,
   `id_pencetak` char(7) DEFAULT NULL,
+  `status` varchar(225) NOT NULL,
   `nomor_surat` varchar(50) NOT NULL,
   `tipe_surat` varchar(45) NOT NULL,
   `nama` varchar(45) NOT NULL,
@@ -298,20 +318,23 @@ CREATE TABLE `surat` (
 -- Dumping data for table `surat`
 --
 
-INSERT INTO `surat` (`id_surat`, `id_pemohon`, `id_pencetak`, `nomor_surat`, `tipe_surat`, `nama`, `tempat_lahir`, `tanggal_lahir`, `agama`, `kebangsaan`, `status_pernikahan`, `pekerjaan`, `alamat`, `jenis_kelamin`, `nik`, `tanggal_surat`, `atas_nama_ttd`, `jabatan_ttd`, `nip_ttd`) VALUES
-('SRT001', 'WRG001', NULL, '471/Pem/176/JG/', 'Keterangan Berpergian', 'Sukma Azani', 'Lombok', '1996-07-04', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Asep Surahman', 'Kepala Desa', '131-00-89876'),
-('SRT002', 'WRG001', NULL, '145/Trantib/02/', 'Keterangan Kelakuan Baik', 'Suckma Azani', 'Lombok', '1996-07-04', ' Islam', 'WNI', 'Menikah', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Asep Surahman', 'Kepala Desa', '131-00-89876'),
-('SRT003', 'WRG001', NULL, '471/Pem./02/JG/', 'Keterangan Cerai', 'Suckma Azani', 'Lombok', '1996-07-04', ' Islam', 'WNI', 'Menikah', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Asep Surahman', 'Kepala Desa', '131-00-89876'),
-('SRT004', 'WRG001', NULL, 'Umum.1/08/JG/II', 'Keterangan Kepemilikan Sepeda Motor', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Asep Surahman', 'Kepala Desa', '131-00-89876'),
-('SRT005', 'WRG001', NULL, '472/Pem /JG/05/', 'Keterangan Bebas Pajak', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Asep Surahman', 'Kepala Desa', '131-00-89876'),
-('SRT006', 'WRG001', NULL, '471/Pem/12/JG/V', 'Keterangan Beda Nama', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Aep Suherman', 'Sekretaris Desa', '131-01-87875'),
-('SRT007', 'WRG001', NULL, '350/Trantib/08/', 'Keterangan Kehilangan', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Aep Suherman', 'Sekretaris Desa', '131-01-87875'),
-('SRT008', 'WRG001', NULL, '350/Trantib/87/JG/XII/2018', 'Keterangan Telah Menikah', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Menikah', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Aep Suherman', 'Sekretaris Desa', '131-01-87875'),
-('SRT009', 'WRG001', NULL, '', 'Pertanggungjawaban Orang Tua', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Menikah', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Aep Suherman', 'Sekretaris Desa', '131-01-87875'),
-('SRT010', 'WRG001', NULL, 'batal', 'Keterangan Berpergian', 'Sukma Azani', 'Lombok', '2002-02-11', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '0000-00-00', '-', '-', '-'),
-('SRT011', 'WRG001', NULL, 'batal', 'Keterangan Berpergian', 'Suckma Azani', 'Lombok', '2002-02-11', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '0000-00-00', '-', '-', '-'),
-('SRT012', 'WRG001', NULL, '-', 'Keterangan Berpergian', 'Suckma Azani', 'Lombok', '2002-02-07', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '0000-00-00', '-', '-', '-'),
-('SRT013', 'WRG001', NULL, 'batal', 'Keterangan Cerai', 'Suckma Azani', 'Lombok', '1996-03-14', ' Islam', 'WNI', 'Duda', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '0000-00-00', '-', '-', '-');
+INSERT INTO `surat` (`id_surat`, `id_pemohon`, `id_pencetak`, `status`, `nomor_surat`, `tipe_surat`, `nama`, `tempat_lahir`, `tanggal_lahir`, `agama`, `kebangsaan`, `status_pernikahan`, `pekerjaan`, `alamat`, `jenis_kelamin`, `nik`, `tanggal_surat`, `atas_nama_ttd`, `jabatan_ttd`, `nip_ttd`) VALUES
+('SRT001', 'WRG001', NULL, '', '471/Pem/176/JG/', 'Keterangan Berpergian', 'Sukma Azani', 'Lombok', '1996-07-04', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Asep Surahman', 'Kepala Desa', '131-00-89876'),
+('SRT002', 'WRG001', NULL, '', '145/Trantib/02/', 'Keterangan Kelakuan Baik', 'Suckma Azani', 'Lombok', '1996-07-04', ' Islam', 'WNI', 'Menikah', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Asep Surahman', 'Kepala Desa', '131-00-89876'),
+('SRT003', 'WRG001', NULL, '', '471/Pem./02/JG/', 'Keterangan Cerai', 'Suckma Azani', 'Lombok', '1996-07-04', ' Islam', 'WNI', 'Menikah', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Asep Surahman', 'Kepala Desa', '131-00-89876'),
+('SRT004', 'WRG001', NULL, '', 'Umum.1/08/JG/II', 'Keterangan Kepemilikan Sepeda Motor', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Asep Surahman', 'Kepala Desa', '131-00-89876'),
+('SRT005', 'WRG001', NULL, '', '472/Pem /JG/05/', 'Keterangan Bebas Pajak', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Asep Surahman', 'Kepala Desa', '131-00-89876'),
+('SRT006', 'WRG001', NULL, '', '471/Pem/12/JG/V', 'Keterangan Beda Nama', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Aep Suherman', 'Sekretaris Desa', '131-01-87875'),
+('SRT007', 'WRG001', NULL, '', '350/Trantib/08/', 'Keterangan Kehilangan', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Aep Suherman', 'Sekretaris Desa', '131-01-87875'),
+('SRT008', 'WRG001', NULL, '', '350/Trantib/87/JG/XII/2018', 'Keterangan Telah Menikah', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Menikah', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Aep Suherman', 'Sekretaris Desa', '131-01-87875'),
+('SRT009', 'WRG001', NULL, '', '', 'Pertanggungjawaban Orang Tua', 'Suckma Azani', 'Lombok', '1996-07-04', 'Islam', 'WNI', 'Menikah', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '2019-08-12', 'Aep Suherman', 'Sekretaris Desa', '131-01-87875'),
+('SRT010', 'WRG001', NULL, '', 'batal', 'Keterangan Berpergian', 'Sukma Azani', 'Lombok', '2002-02-11', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '0000-00-00', '-', '-', '-'),
+('SRT011', 'WRG001', NULL, '', 'batal', 'Keterangan Berpergian', 'Suckma Azani', 'Lombok', '2002-02-11', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '0000-00-00', '-', '-', '-'),
+('SRT012', 'WRG001', NULL, '', '-', 'Keterangan Berpergian', 'Suckma Azani', 'Lombok', '2002-02-07', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '0000-00-00', '-', '-', '-'),
+('SRT013', 'WRG001', NULL, '', 'batal', 'Keterangan Cerai', 'Suckma Azani', 'Lombok', '1996-03-14', ' Islam', 'WNI', 'Duda', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '0000-00-00', '-', '-', '-'),
+('SRT014', 'WRG001', NULL, '', '-', 'Keterangan Kelakuan Baik', 'Suckma Azani', 'Lombok', '1996-07-04', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '0000-00-00', '-', '-', '-'),
+('SRT015', 'WRG001', NULL, '', '-', 'Keterangan Kehilangan', 'Suckma Azani', 'Lombok', '2002-03-05', ' Islam', 'WNI', 'Menikah', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '0000-00-00', '-', '-', '-'),
+('SRT016', 'WRG001', NULL, '', '-', 'Keterangan Berpergian', 'Suckma Azani', 'Lombok', '1996-07-04', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '3205220704960005', '0000-00-00', '-', '-', '-');
 
 -- --------------------------------------------------------
 
@@ -333,16 +356,17 @@ CREATE TABLE `warga` (
   `alamat` char(100) NOT NULL,
   `jenis_kelamin` char(1) NOT NULL,
   `kontak` varchar(13) DEFAULT NULL,
-  `nik` char(16) NOT NULL
+  `nik` char(16) NOT NULL,
+  `ktp` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `warga`
 --
 
-INSERT INTO `warga` (`id_warga`, `username`, `password`, `nama`, `tempat_lahir`, `tanggal_lahir`, `agama`, `kebangsaan`, `status_pernikahan`, `pekerjaan`, `alamat`, `jenis_kelamin`, `kontak`, `nik`) VALUES
-('WRG001', 'cule', 'e10adc3949ba59abbe56e057f20f883e', 'Suckma Azani', 'Lombok', '1995-03-01', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '083822127362', '3205220704960005'),
-('WRG002', 'zaldi19', 'e10adc3949ba59abbe56e057f20f883e', 'Rizaldi Ramdlani Pamungkas', 'Garut', '1996-02-01', 'Islam', 'WNI', 'Lajang', 'Swasta', 'Garut', 'L', '085353140568', '3205120102960009');
+INSERT INTO `warga` (`id_warga`, `username`, `password`, `nama`, `tempat_lahir`, `tanggal_lahir`, `agama`, `kebangsaan`, `status_pernikahan`, `pekerjaan`, `alamat`, `jenis_kelamin`, `kontak`, `nik`, `ktp`) VALUES
+('WRG001', 'cule', 'e10adc3949ba59abbe56e057f20f883e', 'Suckma Azani', 'Lombok', '1995-03-01', ' Islam', 'WNI', 'Lajang', 'Mahasiswa', 'Kp Telugu RT 02 RW 03 Desa Jenggala Kecamatan Jenggala Kabupaten Barat Nusa Tenggara Timur', 'L', '083822127362', '3205220704960005', ''),
+('WRG002', 'zaldi19', 'e10adc3949ba59abbe56e057f20f883e', 'Rizaldi Ramdlani Pamungkas', 'Garut', '1996-02-01', 'Islam', 'WNI', 'Lajang', 'Swasta', 'Garut', 'L', '085353140568', '3205120102960009', '');
 
 --
 -- Indexes for dumped tables
@@ -404,6 +428,14 @@ ALTER TABLE `keterangan_ksm`
 ALTER TABLE `keterangan_telah_menikah`
   ADD PRIMARY KEY (`id_sub_surat`),
   ADD KEY `id_surat` (`id_surat`);
+
+--
+-- Indexes for table `notifikasi`
+--
+ALTER TABLE `notifikasi`
+  ADD PRIMARY KEY (`id_notifikasi`),
+  ADD KEY `id_surat` (`id_surat`),
+  ADD KEY `id_warga` (`id_warga`);
 
 --
 -- Indexes for table `pertanggung_jawaban_ortu`
@@ -487,6 +519,13 @@ ALTER TABLE `keterangan_ksm`
 --
 ALTER TABLE `keterangan_telah_menikah`
   ADD CONSTRAINT `keterangan_telah_menikah_ibfk_1` FOREIGN KEY (`id_surat`) REFERENCES `surat` (`id_surat`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `notifikasi`
+--
+ALTER TABLE `notifikasi`
+  ADD CONSTRAINT `notifikasi_ibfk_2` FOREIGN KEY (`id_warga`) REFERENCES `warga` (`id_warga`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `notifikasi_ibfk_1` FOREIGN KEY (`id_surat`) REFERENCES `surat` (`id_surat`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `pertanggung_jawaban_ortu`
