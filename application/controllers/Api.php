@@ -356,7 +356,7 @@ class Api extends CI_Controller {
 			'alamat' => $this->input->post('alamat'),
 			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
 			'nik' => $this->input->post('nik'),
-			'tanggal_surat' => $this->input->post('tanggal_surat'),
+			'tanggal_surat' => date("Y-m-d"),
 			'atas_nama_ttd' => $this->input->post('atas_nama_ttd'),
 			'jabatan_ttd' => $this->input->post('jabatan_ttd'),
 			'nip_ttd' => $this->input->post('nip_ttd')
@@ -372,7 +372,7 @@ class Api extends CI_Controller {
 		if($this->surat_model->set_surat($data_surat) > 0){
 			if($this->surat_model->set_sub_surat($data_sub_surat, 'keterangan_berpergian') > 0){
 				
-				$response = array('Status' => "Success", "Code" => 200);
+				$response = array('Status' => "Success", "Code" => 200, "Ekstra" => $id_surat);
 				
 				$this->output->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
@@ -414,7 +414,7 @@ class Api extends CI_Controller {
 			'alamat' => $this->input->post('alamat'),
 			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
 			'nik' => $this->input->post('nik'),
-			'tanggal_surat' => $this->input->post('tanggal_surat'),
+			'tanggal_surat' => date("Y-m-d"),
 			'atas_nama_ttd' => $this->input->post('atas_nama_ttd'),
 			'jabatan_ttd' => $this->input->post('jabatan_ttd'),
 			'nip_ttd' => $this->input->post('nip_ttd')
@@ -428,7 +428,7 @@ class Api extends CI_Controller {
 		if($this->surat_model->set_surat($data_surat) > 0){
 			if($this->surat_model->set_sub_surat($data_sub_surat, 'keterangan_kelakuan') > 0){
 				
-				$response = array('Status' => "Success", "Code" => 200);
+				$response = array('Status' => "Success", "Code" => 200, "Ekstra" => $id_surat);
 				
 				$this->output->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
@@ -470,7 +470,7 @@ class Api extends CI_Controller {
 			'alamat' => $this->input->post('alamat'),
 			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
 			'nik' => $this->input->post('nik'),
-			'tanggal_surat' => $this->input->post('tanggal_surat'),
+			'tanggal_surat' => date("Y-m-d"),
 			'atas_nama_ttd' => $this->input->post('atas_nama_ttd'),
 			'jabatan_ttd' => $this->input->post('jabatan_ttd'),
 			'nip_ttd' => $this->input->post('nip_ttd')
@@ -488,7 +488,7 @@ class Api extends CI_Controller {
 		if($this->surat_model->set_surat($data_surat) > 0){
 			if($this->surat_model->set_sub_surat($data_sub_surat, 'keterangan_cerai') > 0){
 				
-				$response = array('Status' => "Success", "Code" => 200);
+				$response = array('Status' => "Success", "Code" => 200, "Ekstra" => $id_surat);
 				
 				$this->output->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
@@ -530,7 +530,7 @@ class Api extends CI_Controller {
 			'alamat' => $this->input->post('alamat'),
 			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
 			'nik' => $this->input->post('nik'),
-			'tanggal_surat' => $this->input->post('tanggal_surat'),
+			'tanggal_surat' => date("Y-m-d"),
 			'atas_nama_ttd' => $this->input->post('atas_nama_ttd'),
 			'jabatan_ttd' => $this->input->post('jabatan_ttd'),
 			'nip_ttd' => $this->input->post('nip_ttd')
@@ -556,7 +556,7 @@ class Api extends CI_Controller {
 		if($this->surat_model->set_surat($data_surat) > 0){
 			if($this->surat_model->set_sub_surat($data_sub_surat, 'keterangan_ksm') > 0){
 				
-				$response = array('Status' => "Success", "Code" => 200);
+				$response = array('Status' => "Success", "Code" => 200, "Ekstra" => $id_surat);
 				
 				$this->output->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
@@ -598,7 +598,7 @@ class Api extends CI_Controller {
 			'alamat' => $this->input->post('alamat'),
 			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
 			'nik' => $this->input->post('nik'),
-			'tanggal_surat' => $this->input->post('tanggal_surat'),
+			'tanggal_surat' => date("Y-m-d"),
 			'atas_nama_ttd' => $this->input->post('atas_nama_ttd'),
 			'jabatan_ttd' => $this->input->post('jabatan_ttd'),
 			'nip_ttd' => $this->input->post('nip_ttd')
@@ -613,7 +613,7 @@ class Api extends CI_Controller {
 		if($this->surat_model->set_surat($data_surat) > 0){
 			if($this->surat_model->set_sub_surat($data_sub_surat, 'keterangan_bebas_pajak') > 0){
 				
-				$response = array('Status' => "Success", "Code" => 200);
+				$response = array('Status' => "Success", "Code" => 200, "Ekstra" => $id_surat);
 				
 				$this->output->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
@@ -655,7 +655,7 @@ class Api extends CI_Controller {
 			'alamat' => $this->input->post('alamat'),
 			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
 			'nik' => $this->input->post('nik'),
-			'tanggal_surat' => $this->input->post('tanggal_surat'),
+			'tanggal_surat' => date("Y-m-d"),
 			'atas_nama_ttd' => $this->input->post('atas_nama_ttd'),
 			'jabatan_ttd' => $this->input->post('jabatan_ttd'),
 			'nip_ttd' => $this->input->post('nip_ttd')
@@ -675,7 +675,7 @@ class Api extends CI_Controller {
 		if($this->surat_model->set_surat($data_surat) > 0){
 			if($this->surat_model->set_sub_surat($data_sub_surat, 'keterangan_beda_nama') > 0){
 				
-				$response = array('Status' => "Success", "Code" => 200);
+				$response = array('Status' => "Success", "Code" => 200, "Ekstra" => $id_surat);
 				
 				$this->output->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
@@ -717,7 +717,7 @@ class Api extends CI_Controller {
 			'alamat' => $this->input->post('alamat'),
 			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
 			'nik' => $this->input->post('nik'),
-			'tanggal_surat' => $this->input->post('tanggal_surat'),
+			'tanggal_surat' => date("Y-m-d"),
 			'atas_nama_ttd' => $this->input->post('atas_nama_ttd'),
 			'jabatan_ttd' => $this->input->post('jabatan_ttd'),
 			'nip_ttd' => $this->input->post('nip_ttd')
@@ -734,7 +734,7 @@ class Api extends CI_Controller {
 		if($this->surat_model->set_surat($data_surat) > 0){
 			if($this->surat_model->set_sub_surat($data_sub_surat, 'keterangan_kehilangan') > 0){
 				
-				$response = array('Status' => "Success", "Code" => 200);
+				$response = array('Status' => "Success", "Code" => 200, "Ekstra" => $id_surat);
 				
 				$this->output->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
@@ -776,7 +776,7 @@ class Api extends CI_Controller {
 			'alamat' => $this->input->post('alamat'),
 			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
 			'nik' => $this->input->post('nik'),
-			'tanggal_surat' => $this->input->post('tanggal_surat'),
+			'tanggal_surat' => date("Y-m-d"),
 			'atas_nama_ttd' => $this->input->post('atas_nama_ttd'),
 			'jabatan_ttd' => $this->input->post('jabatan_ttd'),
 			'nip_ttd' => $this->input->post('nip_ttd')
@@ -800,7 +800,7 @@ class Api extends CI_Controller {
 		if($this->surat_model->set_surat($data_surat) > 0){
 			if($this->surat_model->set_sub_surat($data_sub_surat, 'keterangan_telah_menikah') > 0){
 				
-				$response = array('Status' => "Success", "Code" => 200);
+				$response = array('Status' => "Success", "Code" => 200, "Ekstra" => $id_surat);
 				
 				$this->output->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
@@ -842,7 +842,7 @@ class Api extends CI_Controller {
 			'alamat' => $this->input->post('alamat'),
 			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
 			'nik' => $this->input->post('nik'),
-			'tanggal_surat' => $this->input->post('tanggal_surat'),
+			'tanggal_surat' => date("Y-m-d"),
 			'atas_nama_ttd' => $this->input->post('atas_nama_ttd'),
 			'jabatan_ttd' => $this->input->post('jabatan_ttd'),
 			'nip_ttd' => $this->input->post('nip_ttd')
@@ -872,7 +872,129 @@ class Api extends CI_Controller {
 		if($this->surat_model->set_surat($data_surat) > 0){
 			if($this->surat_model->set_sub_surat($data_sub_surat, 'pertanggung_jawaban_ortu') > 0){
 				
-				$response = array('Status' => "Success", "Code" => 200);
+				$response = array('Status' => "Success", "Code" => 200, "Ekstra" => $id_surat);
+				
+				$this->output->set_status_header(200)
+					->set_content_type('application/json', 'utf-8')
+					->set_output(json_encode($response));
+			}else{
+				$response = array('Status' => "Failed", "Code" => 404);
+				
+				$this->output->set_status_header(404)
+					->set_content_type('application/json', 'utf-8')
+					->set_output(json_encode($response));
+			}
+		}else{
+			$response = array('Status' => "Failed", "Code" => 404);
+				
+			$this->output->set_status_header(404)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($response));
+		}
+	}
+	
+	public function set_surat_pemotongan_hewan(){
+		$this->check_api_key();
+		
+		$id_surat = $this->generate_new_id("surat","id_surat","SRT");
+		$id_sub_surat = $this->generate_new_id("pemotongan_hewan","id_sub_surat","SUB");
+		
+		$data_surat = array(
+			'id_surat' => $id_surat,
+			'id_pemohon' => $this->input->post('id_pemohon'),
+			'nomor_surat' => $this->input->post('nomor_surat'), 
+			'tipe_surat' => $this->input->post('tipe_surat'),
+			'nama' => $this->input->post('nama'),
+			'tempat_lahir' => $this->input->post('tempat_lahir'),
+			'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+			'agama' => $this->input->post('agama'),
+			'kebangsaan' => $this->input->post('kebangsaan'),
+			'status_pernikahan' => $this->input->post('status_pernikahan'),
+			'pekerjaan' => $this->input->post('pekerjaan'),
+			'alamat' => $this->input->post('alamat'),
+			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+			'nik' => $this->input->post('nik'),
+			'tanggal_surat' => date("Y-m-d"),
+			'atas_nama_ttd' => $this->input->post('atas_nama_ttd'),
+			'jabatan_ttd' => $this->input->post('jabatan_ttd'),
+			'nip_ttd' => $this->input->post('nip_ttd')
+		);
+		
+		$data_sub_surat = array(
+			'id_sub_surat' => $id_sub_surat,
+			'id_surat' => $id_surat,
+			'hewan' => $this->input->post('hewan'), 
+			'umur_hewan' => $this->input->post('umur_hewan'), 
+			'warna_bulu' => $this->input->post('warna_bulu'),
+			'warna_ekor' => $this->input->post('warna_ekor'),
+			'tipe_tanduk' => $this->input->post('tipe_tanduk'),
+			'warna_kaki' => $this->input->post('warna_kaki'),
+			'tanda_lain' => $this->input->post('tanda_lain'),
+			'alasan_pemotongan' => $this->input->post('alasan_pemotongan'),
+		);
+		
+		if($this->surat_model->set_surat($data_surat) > 0){
+			if($this->surat_model->set_sub_surat($data_sub_surat, 'pemotongan_hewan') > 0){
+				
+				$response = array('Status' => "Success", "Code" => 200, "Ekstra" => $id_surat);
+				
+				$this->output->set_status_header(200)
+					->set_content_type('application/json', 'utf-8')
+					->set_output(json_encode($response));
+			}else{
+				$response = array('Status' => "Failed", "Code" => 404);
+				
+				$this->output->set_status_header(404)
+					->set_content_type('application/json', 'utf-8')
+					->set_output(json_encode($response));
+			}
+		}else{
+			$response = array('Status' => "Failed", "Code" => 404);
+				
+			$this->output->set_status_header(404)
+				->set_content_type('application/json', 'utf-8')
+				->set_output(json_encode($response));
+		}		
+	}
+	
+	public function set_surat_ahli_waris(){
+		$this->check_api_key();
+		
+		$id_surat = $this->generate_new_id("surat","id_surat","SRT");
+		$id_sub_surat = $this->generate_new_id("ahli_waris","id_sub_surat","SUB");
+		
+		$data_surat = array(
+			'id_surat' => $id_surat,
+			'id_pemohon' => $this->input->post('id_pemohon'),
+			'nomor_surat' => $this->input->post('nomor_surat'), 
+			'tipe_surat' => $this->input->post('tipe_surat'),
+			'nama' => $this->input->post('nama'),
+			'tempat_lahir' => $this->input->post('tempat_lahir'),
+			'tanggal_lahir' => $this->input->post('tanggal_lahir'),
+			'agama' => $this->input->post('agama'),
+			'kebangsaan' => $this->input->post('kebangsaan'),
+			'status_pernikahan' => $this->input->post('status_pernikahan'),
+			'pekerjaan' => $this->input->post('pekerjaan'),
+			'alamat' => $this->input->post('alamat'),
+			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+			'nik' => $this->input->post('nik'),
+			'tanggal_surat' => date("Y-m-d"),
+			'atas_nama_ttd' => $this->input->post('atas_nama_ttd'),
+			'jabatan_ttd' => $this->input->post('jabatan_ttd'),
+			'nip_ttd' => $this->input->post('nip_ttd')
+		);
+		
+		$data_sub_surat = array(
+			'id_sub_surat' => $id_sub_surat,
+			'id_surat' => $id_surat,
+			'pemberi_waris' => $this->input->post('pemberi_waris'), 
+			'keterangan_pemberi_waris' => $this->input->post('keterangan_pemberi_waris'),
+		);
+		
+		if($this->surat_model->set_surat($data_surat) > 0){
+			if($this->surat_model->set_sub_surat($data_sub_surat, 'ahli_waris') > 0){
+				
+				$response = array('Status' => "Success", "Code" => 200, "Ekstra" => $id_surat);
 				
 				$this->output->set_status_header(200)
 					->set_content_type('application/json', 'utf-8')
@@ -944,6 +1066,8 @@ class Api extends CI_Controller {
 			case "Keterangan Kehilangan" : $tabel_surat = "keterangan_kehilangan"; break;
 			case "Keterangan Telah Menikah" : $tabel_surat = "keterangan_telah_menikah"; break;
 			case "Pertanggungjawaban Orang Tua" : $tabel_surat = "pertanggung_jawaban_ortu"; break;
+			case "Keterangan Pemotongan Hewan" : $tabel_surat = "pemotongan_hewan"; break;
+			case "Keterangan Ahli Waris" : $tabel_surat = "ahli_waris"; break;
 			default : $tabel_surat = ""; break;
 		}
 		
@@ -1151,5 +1275,117 @@ class Api extends CI_Controller {
         }
 	}
 	
+	public function upload_ktp($name){
+	    if(isset($_FILES["lam_ktp"]["name"])) {
+          
+            // Make sure you have created this directory already
+            $target_dir = "lampiran_surat/";
+			$name = "lampiran_ktp-".$name;
+          
+            // Generate a random name 
+            $target_file = $target_dir . $name . '.' . $_POST['ext'];
+            $check = getimagesize($_FILES["lam_ktp"]["tmp_name"]);
+            if($check !== false) {
+                if (move_uploaded_file($_FILES["lam_ktp"]["tmp_name"], $target_file)) {
+                    return true;
+                }else {
+                    return false;
+                }
+            } else {
+                return false;
+               
+            }
+        }else{
+             return false;
+        }
+	}
+	
+	public function upload_kk($name){
+	    if(isset($_FILES["lam_kk"]["name"])) {
+          
+            // Make sure you have created this directory already
+            $target_dir = "lampiran_surat/";
+			$name = "lampiran_kk-".$name;
+          
+            // Generate a random name 
+            $target_file = $target_dir . $name . '.' . $_POST['ext'];
+            $check = getimagesize($_FILES["lam_kk"]["tmp_name"]);
+            if($check !== false) {
+                if (move_uploaded_file($_FILES["lam_kk"]["tmp_name"], $target_file)) {
+                    return true;
+                }else {
+                    return false;
+                }
+            } else {
+                return false;
+               
+            }
+        }else{
+             return false;
+        }
+	}
+	
+	public function upload_lainnya($name){
+	    if(isset($_FILES["lam_lain"]["name"]) and $_FILES["lam_lain"]["name"] != null) {
+          
+            // Make sure you have created this directory already
+            $target_dir = "lampiran_surat/";
+			$name = "lampiran_lainnya-".$name;
+          
+            // Generate a random name 
+            $target_file = $target_dir . $name . '.' . $_POST['ext'];
+            $check = getimagesize($_FILES["lam_lain"]["tmp_name"]);
+            if($check !== false) {
+                if (move_uploaded_file($_FILES["lam_lain"]["tmp_name"], $target_file)) {
+                    return true;
+                }else {
+                    return false;
+                }
+            } else {
+                return false;
+               
+            }
+        }else{
+             return false;
+        }
+	}
+	
+	public function upload_bukti(){
+	    $this->check_api_key();
+	    
+		$id_surat = $this->input->post("id_surat");
+		
+		if(($this->upload_ktp($id_surat) and $this->upload_kk($id_surat)) or ($this->upload_lainnya($id_surat))){
+		    
+		    $data = array(
+    			'lamp_ktp' => 'https://terraciv.me/lampiran_surat/'."lampiran_ktp-".$id_surat . '.' . "jpg",
+    			'lamp_kk' => 'https://terraciv.me/lampiran_surat/'."lampiran_kk-".$id_surat . '.' . "jpg",
+		    );
+		    
+		    if($this->upload_lainnya($id_surat) == true){
+		        $data["lamp_lain"] = 'https://terraciv.me/lampiran_surat/'."lampiran_lainnya-".$id_surat . '.' . "jpg";
+    		}
+		    
+		    $statUpload = $this->surat_model->update_uri_lampiran($id_surat, $data);
+		    
+		    if($statUpload >= 1){
+		        $response = array('Status' => "Success", "Code" => 200);
+    		    $this->output->set_status_header(200)
+    					->set_content_type('application/json', 'utf-8')
+    					->set_output(json_encode($response));
+		    }else{
+		        $response = array('Status' => "Berkas gagal tercatat", "Code" => 404);
+			    $this->output->set_status_header(404)
+						->set_content_type('application/json', 'utf-8')
+						->set_output(json_encode($response));
+		    }
+		    
+		}else{
+			$response = array('Status' => "Berkas gagal terunggah", "Code" => 401);
+			$this->output->set_status_header(401)
+						->set_content_type('application/json', 'utf-8')
+						->set_output(json_encode($response));
+		}
+	}
 	
 }

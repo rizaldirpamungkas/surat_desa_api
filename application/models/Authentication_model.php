@@ -34,7 +34,12 @@ class Authentication_Model extends CI_Model {
 	
 	public function last_id($table_name,$column_id){
 		$last_row = $this->db->query("select ".$column_id." from ".$table_name." order by ".$column_id." desc limit 1")->row_array();
-		return $last_row[$column_id];
+		
+		if($last_row == null){
+			return null;
+		}else{
+			return $last_row[$column_id];
+		}
 	}
 	
 	public function update_data_warga($id, $pass, $data){

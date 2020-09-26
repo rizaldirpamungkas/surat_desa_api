@@ -58,6 +58,11 @@ class Surat_Model extends CI_Model {
 		return $this->db->affected_rows();
 	}
 	
+	public function update_uri_lampiran($id_surat, $data){
+		$this->db->update("surat", $data, array('id_surat' => $id_surat));
+		return $this->db->affected_rows();
+	}
+	
 	public function cancel_surat($id_surat){
 		$data = array("nomor_surat" => "batal");
 		$this->db->update("surat", $data, array('id_surat' => $id_surat));
